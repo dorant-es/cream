@@ -14,8 +14,7 @@ describe('RegistrationUseCase', () => {
   });
 
   beforeEach(async () => {
-    const module = await Test.createTestingModule({
-      imports: [],
+    const app = await Test.createTestingModule({
       providers: [
         RegistrationUseCase,
         {
@@ -29,7 +28,7 @@ describe('RegistrationUseCase', () => {
       ],
     }).compile();
 
-    registrationUseCase = module.get<RegistrationUseCase>(RegistrationUseCase);
+    registrationUseCase = app.get<RegistrationUseCase>(RegistrationUseCase);
   });
 
   it('should be defined', () => {
