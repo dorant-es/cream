@@ -19,8 +19,26 @@ describe('CustomersController (e2e)', () => {
     ]);
   });
 
-  it('GET /customer/registration/regfields', async () => {
+  it('GET /customer/registration/regfields (401)', async () => {
     const response = await request(app.getHttpServer()).get('/customer/registration/regfields');
+    expect(response.status).toBe(HttpStatus.UNAUTHORIZED);
+    expect(response.body).toBeDefined();
+    expect(response.body).toHaveProperty('requestId');
+    expect(response.body).toHaveProperty('timestamp');
+    expect(response.body).toHaveProperty('path');
+    expect(response.body).toHaveProperty('statusCode');
+    expect(response.body).toHaveProperty('message');
+    expect(response.body.statusCode).toBe(HttpStatus.UNAUTHORIZED);
+    expect(response.body.message).toBe('Unauthorized');
+    expect(response.body.path).toBe('/customer/registration/regfields');
+  });
+
+  it('GET /customer/registration/regfields (200)', async () => {
+    const response = await request(app.getHttpServer(), {})
+      .get('/customer/registration/regfields')
+      .set({
+        Authorization: `ApiKey ${process.env.API_KEY}`,
+      });
     expect(response.status).toBe(HttpStatus.OK);
     expect(response.body).toBeDefined();
     expect(response.body).toHaveProperty('requestId');

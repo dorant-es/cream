@@ -9,7 +9,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forFeature(() => ({
-      platon: platonLoader,
+      platon: platonLoader(),
     })),
     HttpModule.registerAsync({
       imports: [ConfigModule.forFeature(platonLoader)],
