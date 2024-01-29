@@ -1,4 +1,4 @@
-import { createApp } from '#/main';
+import { createApp } from '#/setup';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 

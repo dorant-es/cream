@@ -19,9 +19,9 @@
     "lint:staged": "lint-staged",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
+    "test:cov": "dotenv -e .env.testing -- jest --coverage --config jest.config.json --runInBand",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "dotenv -e .env.testing -- jest --config ./test/jest-e2e.json --runInBand",
+    "test:e2e": "dotenv -e .env.testing -- jest --config jest-e2e.json --runInBand",
     "hello": "docker-compose up -d",
     "bye": "docker-compose down",
     "compodoc": "compodoc -p tsconfig.json --theme material --output docs",
@@ -77,31 +77,6 @@
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.6"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": ".",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "./coverage",
-    "testEnvironment": "node",
-    "roots": [
-      "<rootDir>/src/",
-      "<rootDir>/test/"
-    ],
-    "moduleNameMapper": {
-      "^@/(.*)": "<rootDir>/src/$1",
-      "^#/(.*)": "<rootDir>/test/$1"
-    }
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --fix"

@@ -1,6 +1,6 @@
-import { createApp } from '#/main';
 import { filteredRegistrationFieldsResponse } from '#/mocks/third-party/platon/filtered-registration-fields.response';
 import { getRegistrationFieldsResponse } from '#/mocks/third-party/platon/get-registration-fields.response';
+import { createApp } from '#/setup';
 import { PLATON_SERVICE_TOKEN } from '@/modules/customers/domain/contracts/platon.service';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';

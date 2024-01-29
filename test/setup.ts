@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { AppModule } from '@/app/app.module';
 import { INestApplication, Provider, Type } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
