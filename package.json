@@ -1,7 +1,7 @@
 {
   "name": "cream-technical-test",
   "type": "commonjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Technical test using NestJS and Axios with Clean Architecture",
   "author": "Fernando Dorantes <fernando@dorant.es>",
   "private": false,
