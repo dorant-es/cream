@@ -1,8 +1,8 @@
 export function filterVisibleFields<T>(object: {
-  [key: string]: any & { visible?: number };
+  [key: string]: any & { visible?: boolean };
 }): T {
   return Object.entries(object).reduce((acc, [key, value]) => {
-    if (value.visible === 0) {
+    if (!value.visible) {
       return acc;
     }
 

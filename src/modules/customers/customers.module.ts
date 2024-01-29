@@ -1,6 +1,7 @@
 import { useCases } from '@/modules/customers/application/use-cases';
 import { RegistrationController } from '@/modules/customers/infrastructure/http/controllers/registration.controller';
 import { platonLoader } from '@/modules/customers/infrastructure/third-party/platon/config/platon.loader';
+import { PlatonService } from '@/modules/customers/infrastructure/third-party/platon/services/platon.service';
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -19,6 +20,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
   ],
   controllers: [RegistrationController],
-  providers: [...useCases],
+  providers: [PlatonService, ...useCases],
 })
 export class CustomersModule {}

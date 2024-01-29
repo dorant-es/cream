@@ -1,9 +1,11 @@
+import { Environment } from '@/core/domain/enums/environment.enum';
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
       // ENVIRONMENT
-      NODE_ENV: string;
-      ENV?: 'development' | 'production';
+      NODE_ENV: Environment;
+      DEBUG: string;
 
       // SERVER
       HOST: string;

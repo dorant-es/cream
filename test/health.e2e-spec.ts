@@ -1,20 +1,12 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { createApp } from '#/main';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-
-import { HealthModule } from '@/modules/health/health.module';
-import { CoreModule } from '@/core/core.module';
 
 describe('HealthController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [CoreModule, HealthModule],
-    }).compile();
-
-    app = moduleFixture.createNestApplication();
-    await app.init();
+    app = await createApp();
   });
 
   it('GET /health', () => {

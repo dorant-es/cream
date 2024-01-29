@@ -4,7 +4,7 @@ import { TransformInterceptor } from '@/core/infrastructure/interceptors/transfo
 import { JsonLoggerService } from '@/core/infrastructure/logger/json.logger';
 import { LoggerMiddleware } from '@/core/infrastructure/middlewares/logger.middleware';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
@@ -29,10 +29,18 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
   ],
 })
 export class CoreModule {
+  private debug: boolean;
+
+  constructor(private readonly configService: ConfigService) {
+    this.debug = this.configService.get('environment.debug');
+  }
+
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes({
-      path: '*',
-      method: RequestMethod.ALL,
-    });
+    if (this.debug) {
+      consumer.apply(LoggerMiddleware).forRoutes({
+        path: '*',
+        method: RequestMethod.ALL,
+      });
+    }
   }
 }

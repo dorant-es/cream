@@ -1,14 +1,10 @@
-import { FieldType } from '@/modules/customers/domain/enums/field-type.enum';
-import { Genders } from '@/modules/customers/domain/enums/gender.enum';
-
-export interface CustomerGender {
-  type: FieldType.SELECT;
-  values: Genders[];
+export interface CustomerPersoncode {
   req: boolean;
   group: string;
   visible: boolean;
   order: number;
-  maxlength: any;
+  maxlength: number;
+  type: string;
   newline: boolean;
   hidetitle: boolean;
   split: boolean;
@@ -22,4 +18,5 @@ export interface CustomerGender {
   auto_approve: boolean;
   condition_type: number;
   condition: any[];
+  regex: string;
 }
