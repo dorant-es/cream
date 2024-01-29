@@ -9,18 +9,14 @@ declare global {
       HOST: string;
       PORT: string;
 
-      RATE_MAX_REQUEST?: string;
-      RATE_INTERVAL?: string;
+      // Anti throttle
+      ANTI_THROTTLE_MAX_REQUEST?: string;
+      ANTI_THROTTLE_INTERVAL?: string;
 
-      // Database
-      DB_HOST: string;
-      DB_PORT?: string;
-      DB_USERNAME?: string;
-      DB_PASSWORD?: string;
-      DB_DATABASE: string;
-
-      // PokeApi
-      POKEAPI_BASE_URL: string;
+      // PLATON
+      PLATON_URL: string;
+      PLATON_LOGIN: string;
+      PLATON_PASSWORD: string;
     }
   }
 }
