@@ -3,6 +3,7 @@ import { HttpExceptionFilter } from '@/core/infrastructure/filters/exception.fil
 import { TransformInterceptor } from '@/core/infrastructure/interceptors/transform.interceptor';
 import { JsonLoggerService } from '@/core/infrastructure/logger/json.logger';
 import { LoggerMiddleware } from '@/core/infrastructure/middlewares/logger.middleware';
+import { TracerMiddleware } from '@/core/infrastructure/middlewares/tracer.middleware';
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
@@ -22,10 +23,6 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
       provide: 'LOGGER_SERVICE',
       useValue: JsonLoggerService.getInstance(),
     },
-    {
-      provide: LoggerMiddleware,
-      useClass: LoggerMiddleware,
-    },
   ],
 })
 export class CoreModule {
@@ -36,7 +33,14 @@ export class CoreModule {
   }
 
   configure(consumer: MiddlewareConsumer) {
+    // Bind requestId to request
+    consumer.apply(TracerMiddleware).forRoutes({
+      path: '*',
+      method: RequestMethod.ALL,
+    });
+
     if (this.debug) {
+      // Log request and response events
       consumer.apply(LoggerMiddleware).forRoutes({
         path: '*',
         method: RequestMethod.ALL,
